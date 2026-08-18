@@ -5,8 +5,10 @@ const state = {
   cart: [],
   address: null,
   customer: { name: "", phone: "" },
-  fulfillment: "entrega", // "entrega" | "retirada"
+  fulfillment: "entrega", // "entrega" | "retirada" | "mesa"
+  tableName: "",
   paymentMethodId: null,
+  paymentChange: { needsChange: false, amount: "" },
   draft: null, // seleção em progresso na tela de produto
   modal: null, // { step: "form" }
   activeCategory: "Mais Pedidos",
@@ -40,7 +42,7 @@ function cartCount() {
 }
 
 function deliveryFee() {
-  return state.fulfillment === "retirada" ? 0 : state.address ? state.address.fee : 0;
+  return state.fulfillment === "retirada" || state.fulfillment === "mesa" ? 0 : state.address ? state.address.fee : 0;
 }
 
 function orderTotal() {

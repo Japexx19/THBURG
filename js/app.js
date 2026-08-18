@@ -125,6 +125,7 @@ document.addEventListener("click", async (e) => {
   const fulfillBtn = e.target.closest("[data-fulfillment]");
   if (fulfillBtn) {
     state.fulfillment = fulfillBtn.dataset.fulfillment;
+    if (state.fulfillment !== "mesa") state.tableName = "";
     render();
     return;
   }
@@ -184,6 +185,14 @@ document.addEventListener("click", async (e) => {
       renderToast("Informe seu nome.");
       return;
     }
+    if (state.fulfillment === "mesa") {
+      const tableName = document.getElementById("table-name")?.value.trim() || "";
+      if (!tableName) {
+        renderToast("Informe o nome.");
+        return;
+      }
+      state.tableName = tableName;
+    }
     state.customer = { name, phone };
     navigate("checkout-pagamento");
     return;
@@ -193,11 +202,30 @@ document.addEventListener("click", async (e) => {
   const pickPayment = e.target.closest("[data-pick-payment]");
   if (pickPayment) {
     state.paymentMethodId = pickPayment.dataset.pickPayment;
+    if (state.paymentMethodId !== "dinheiro") {
+      state.paymentChange = { needsChange: false, amount: "" };
+    }
+    render();
+    return;
+  }
+
+  const changeChoice = e.target.closest("[data-change-needed]");
+  if (changeChoice) {
+    state.paymentChange.needsChange = changeChoice.dataset.changeNeeded === "yes";
+    if (!state.paymentChange.needsChange) state.paymentChange.amount = "";
     render();
     return;
   }
 
   if (e.target.id === "continue-resumo" && !e.target.disabled) {
+    if (state.fulfillment === "entrega" && state.paymentMethodId === "dinheiro" && state.paymentChange.needsChange) {
+      const amount = Number(state.paymentChange.amount);
+      const total = orderTotal();
+      if (!Number.isFinite(amount) || amount <= total) {
+        renderToast(`Informe um valor de troco maior que R$ ${total.toFixed(2).replace(".", ",")}.`);
+        return;
+      }
+    }
     navigate("checkout-resumo");
     return;
   }
@@ -213,7 +241,8 @@ document.addEventListener("click", async (e) => {
         customer_phone: state.customer.phone,
         fulfillment: state.fulfillment,
         payment_method: state.paymentMethodId,
-        address: state.address,
+        payment_change: state.fulfillment === "entrega" && state.paymentMethodId === "dinheiro" && state.paymentChange.needsChange ? Number(state.paymentChange.amount) : null,
+        address: state.fulfillment === "entrega" ? state.address : (state.fulfillment === "mesa" ? { table: state.tableName } : null),
         delivery_fee: deliveryFee(),
         items: state.cart.map(item => ({
           product_id: item.productId,
@@ -227,7 +256,10 @@ document.addEventListener("click", async (e) => {
       state.lastOrderId = result.order_id;
       clearCart();
       state.address = null;
+      state.tableName = "";
+      state.fulfillment = "entrega";
       state.paymentMethodId = null;
+      state.paymentChange = { needsChange: false, amount: "" };
       navigate("confirmacao");
     } catch (err) {
       btn.disabled = false;
@@ -241,5 +273,8 @@ document.addEventListener("click", async (e) => {
 document.addEventListener("input", (e) => {
   if (e.target.id === "obs-input" && state.draft) {
     state.draft.notes = e.target.value;
+  }
+  if (e.target.id === "change-amount") {
+    state.paymentChange.amount = e.target.value;
   }
 });

@@ -10,18 +10,13 @@ function productMinPrice(p) {
 
 // ---------- HOME ----------
 function renderHome() {
-  const mostOrdered = PRODUCTS.filter((p) => p.mostOrdered);
+  const mostOrdered = PRODUCTS.filter((p) => p.category === "Combos");
   const grouped = CATEGORIES.map((cat) => ({
     cat,
     items: PRODUCTS.filter((p) => p.category === cat),
   })).filter((g) => g.items.length);
 
   return `
-    <div class="search-bar">
-      <input type="text" placeholder="Buscar na loja" id="search-input" />
-      <button class="icon-btn" title="Minha conta">👤</button>
-    </div>
-
     <img class="banner" src="${STORE.banner}" alt="Banner ${STORE.name}" />
 
     <div class="store-card">
@@ -81,7 +76,7 @@ function renderHome() {
       .map(
         (g) => `
       <h2 class="section-title" id="cat-${cssId(g.cat)}">${g.cat}</h2>
-      ${g.items
+      ${g.items.length ? g.items
         .map(
           (p) => `
         <div class="product-row" data-goto-product="${p.id}">
@@ -94,7 +89,7 @@ function renderHome() {
           <img class="thumb" src="${p.image}" alt="${p.name}" />
         </div>`
         )
-        .join("")}
+        .join("") : `<div class="empty-state">Nenhum produto cadastrado nesta categoria.</div>`}
     `
       )
       .join("")}
@@ -136,8 +131,6 @@ function renderProduct(productId) {
         <h1>${product.name}</h1>
         <div class="desc">${product.description}</div>
         <div class="from-price">A partir de <strong>${money(product.price)}</strong></div>
-
-        <div class="modifier-search">🔍 Pesquisar</div>
 
         ${product.modifierGroups
           .map((group) => {
@@ -290,6 +283,7 @@ function renderCheckoutEntrega() {
       <div class="fulfillment-toggle">
         <button class="${state.fulfillment === "entrega" ? "active" : ""}" data-fulfillment="entrega">🚚<br/>Entrega</button>
         <button class="${state.fulfillment === "retirada" ? "active" : ""}" data-fulfillment="retirada">🛍️<br/>Retirada</button>
+        <button class="${state.fulfillment === "mesa" ? "active" : ""}" data-fulfillment="mesa">🍽️<br/>Mesa</button>
       </div>
 
       ${
@@ -310,7 +304,14 @@ function renderCheckoutEntrega() {
             : ""
         }
       `
-          : `<div class="q">Retire seu pedido diretamente em ${STORE.address}, ${STORE.city}.</div>`
+          : state.fulfillment === "mesa"
+            ? `
+        <div class="q">Você está no local? Informe o seu nome.</div>
+        <label class="field-label">Mesa *</label>
+        <input class="field-input" id="table-number" value="${state.tableName || ""}" placeholder="Ex.: 5" inputmode="numeric" />
+        <div class="q">Seu pedido será preparado para a mesa informada.</div>
+      `
+            : `<div class="q">Retire seu pedido diretamente em ${STORE.address}, ${STORE.city}.</div>`
       }
     </div>
 
@@ -396,8 +397,23 @@ function renderCheckoutPagamento() {
   return `
     ${renderPageHeader("Forma de pagamento", { back: "checkout-entrega" })}
     <div class="checkout-section">
-      ${renderGroup("Pagar online", "📱", PAYMENT_METHODS.online)}
-      ${renderGroup("Pagar na entrega", "🏠", PAYMENT_METHODS.delivery)}
+      ${state.fulfillment === "entrega"
+        ? renderGroup("Pagar na entrega", "🏠", PAYMENT_METHODS.delivery)
+        : renderGroup(state.fulfillment === "mesa" ? "Pagar no local" : "Pagar na retirada", state.fulfillment === "mesa" ? "🍽️" : "🛍️", PAYMENT_METHODS.online.concat(PAYMENT_METHODS.delivery))}
+
+      ${state.fulfillment === "entrega" && state.paymentMethodId === "dinheiro" ? `
+        <div class="change-box">
+          <div class="change-title">Precisa de troco?</div>
+          <div class="change-actions">
+            <button type="button" class="change-choice ${!state.paymentChange.needsChange ? "picked" : ""}" data-change-needed="no">Não preciso</button>
+            <button type="button" class="change-choice ${state.paymentChange.needsChange ? "picked" : ""}" data-change-needed="yes">Sim, preciso</button>
+          </div>
+          ${state.paymentChange.needsChange ? `
+            <label class="change-input-label" for="change-amount">Troco para quanto?</label>
+            <div class="change-input-wrap"><span>R$</span><input id="change-amount" type="number" min="0.01" step="0.01" inputmode="decimal" value="${state.paymentChange.amount || ""}" placeholder="Ex.: 50,00"></div>
+          ` : ""}
+        </div>
+      ` : ""}
     </div>
 
     ${renderStepDots(2)}
@@ -418,7 +434,10 @@ function renderCheckoutResumo() {
       <div class="payment-option picked">
         <div class="left">
           <span>${method ? method.icon : ""}</span>
-          <div>${method ? method.name : "Selecione uma forma de pagamento"}</div>
+          <div>
+            <div>${method ? method.name : "Selecione uma forma de pagamento"}</div>
+            ${state.fulfillment === "entrega" && state.paymentMethodId === "dinheiro" && state.paymentChange.needsChange && state.paymentChange.amount ? `<small class="muted">Troco para R$ ${Number(state.paymentChange.amount).toFixed(2).replace(".", ",")}</small>` : ""}
+          </div>
         </div>
         <div class="radio-dot checked"></div>
       </div>
@@ -426,7 +445,7 @@ function renderCheckoutResumo() {
 
     <div class="summary-box">
       <div class="row"><span>Subtotal</span><span>${money(cartTotal())}</span></div>
-      <div class="row"><span>Taxa de entrega</span><span>${money(deliveryFee())}</span></div>
+      <div class="row"><span>${state.fulfillment === "mesa" ? "Mesa" : "Taxa de entrega"}</span><span>${state.fulfillment === "mesa" ? state.tableName : money(deliveryFee())}</span></div>
       <div class="row total"><span>Total</span><span>${money(orderTotal())}</span></div>
     </div>
 
