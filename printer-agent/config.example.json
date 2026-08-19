@@ -1,0 +1,7 @@
+{
+  "apiUrl": "https://SEU-DOMINIO.com.br/api/orders.php",
+  "apiKey": "COLOQUE_A_MESMA_CHAVE_DO_CONFIG.PHP",
+  "printerName": "NOME_DA_IMPRESSORA_NO_WINDOWS",
+  "pollSeconds": 3,
+  "lastOrderId": 0
+}
