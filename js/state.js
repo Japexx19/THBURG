@@ -42,7 +42,8 @@ function cartCount() {
 }
 
 function deliveryFee() {
-  return state.fulfillment === "retirada" || state.fulfillment === "mesa" ? 0 : state.address ? state.address.fee : 0;
+  // THBURG: entrega gratuita
+  return 0;
 }
 
 function orderTotal() {

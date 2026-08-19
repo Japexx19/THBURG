@@ -56,7 +56,7 @@ const PRODUCTS = [
 
   // ---------- Lanches (do mais simples ao mais completo) ----------
       {
-    id: "x-bacon",
+    id: "tapera",
     category: "Hambúrgueres",
     name: "Tapera",
     shortDesc: "Pão brioche, carne, queijo, presunto, batata palha, alface, molho especial e maionese temperada.",
@@ -67,7 +67,7 @@ const PRODUCTS = [
   },
 
     {
-    id: "x-bacon",
+    id: "salgadinho",
     category: "Hambúrgueres",
     name: "Salgadinho",
     shortDesc: "Pão brioche, blend 150g, batata crispy, queijo cheddar, bacon duplo, alface, tomate e molho especial + 100g de batata.",
@@ -77,7 +77,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
    {
-    id: "x-bacon",
+    id: "tuina",
     category: "Hambúrgueres",
     name: "Tuina",
     shortDesc: "Pão brioche, carne, ovo, calabresa, presunto, queijo, alface, cebola, molho especial e maionese temperada.",
@@ -191,7 +191,7 @@ const PRODUCTS = [
 
   // ---------- Pastéis ----------
   {
-    id: "batata-frita",
+    id: "pastel-de-vento",
     category: "Pastéis",
     name: "Pastel de Vento",
     shortDesc: "",
@@ -201,7 +201,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-queijo",
     category: "Pastéis",
     name: "Pastel de Queijo",
     shortDesc: "",
@@ -211,7 +211,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-frango",
     category: "Pastéis",
     name: "Pastel de Frango",
     shortDesc: "",
@@ -221,7 +221,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-calabresa",
     category: "Pastéis",
     name: "Pastel de Calabresa",
     shortDesc: "",
@@ -231,7 +231,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-misto",
     category: "Pastéis",
     name: "Pastel de Misto",
     shortDesc: "",
@@ -241,7 +241,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-presunto",
     category: "Pastéis",
     name: "Pastel de Presunto",
     shortDesc: "",
@@ -251,7 +251,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-carne-moida",
     category: "Pastéis",
     name: "Pastel de Carne Moída",
     shortDesc: "",
@@ -261,7 +261,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-pizza",
     category: "Pastéis",
     name: "Pastel de Pizza",
     shortDesc: "",
@@ -271,7 +271,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-carne-moida-queijo",
     category: "Pastéis",
     name: "Pastel de Carne Moida + Queijo",
     shortDesc: "",
@@ -281,7 +281,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-carne-do-sol",
     category: "Pastéis",
     name: "Pastel de Carne do Sol",
     shortDesc: "",
@@ -291,7 +291,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-x-tudo",
     category: "Pastéis",
     name: "Pastel de X-Tudo",
     shortDesc: "",
@@ -301,7 +301,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-bacon",
     category: "Pastéis",
     name: "Pastel de Bacon",
     shortDesc: "",
@@ -311,7 +311,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-carne-do-sol-queijo",
     category: "Pastéis",
     name: "Pastel de Carne do Sol + Queijo",
     shortDesc: "",
@@ -321,7 +321,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-bacon-queijo",
     category: "Pastéis",
     name: "Pastel de Bacon + Queijo",
     shortDesc: "",
@@ -331,7 +331,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-frango-catupiry-milho",
     category: "Pastéis",
     name: "Pastel de frango + Catupiry + Milho",
     shortDesc: "",
@@ -341,7 +341,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-frango-queijo-azeitona",
     category: "Pastéis",
     name: "Pastel de Frango + Queijo + Azeitona",
     shortDesc: "",
@@ -351,7 +351,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-carne-do-sol-queijo-azeitona",
     category: "Pastéis",
     name: "Pastel de Carne do Sol + Queijo + Azeitona",
     shortDesc: "",
@@ -361,7 +361,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-calabresa-queijo-tomate",
     category: "Pastéis",
     name: "Pastel de Calabresa + Queijo + Tomate",
     shortDesc: "",
@@ -371,7 +371,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-bacon-queijo-cheddar",
     category: "Pastéis",
     name: "Pastel de Bacon + Queijo + Cheddar",
     shortDesc: "",
@@ -381,7 +381,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-calabresa-bacon-cheddar",
     category: "Pastéis",
     name: "Pastel de Calabresa + Bacon + Cheddar",
     shortDesc: "",
@@ -391,7 +391,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-bacon-calabresa-catupiry",
     category: "Pastéis",
     name: "Pastel de Bacon + Calabresa + Catupiry",
     shortDesc: "",
@@ -401,7 +401,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-carne-do-sol-queijo-coalho",
     category: "Pastéis",
     name: "Pastel de Carne do Sol + Queijo Coalho",
     shortDesc: "",
@@ -411,7 +411,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-bacon-frango-catupiry",
     category: "Pastéis",
     name: "Pastel de Bacon + Frango + Catupiry",
     shortDesc: "",
@@ -421,7 +421,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-carne-do-sol-catupiry-cebola",
     category: "Pastéis",
     name: "Pastel de Carne do Sol + Catupiry + Cebola",
     shortDesc: "",
@@ -431,7 +431,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
     {
-    id: "batata-frita",
+    id: "pastel-de-carne-do-sol-queijo-coalho-cebola",
     category: "Pastéis",
     name: "Pastel de Carne do Sol + Queijo Coalho + Cebola",
     shortDesc: "",
@@ -444,7 +444,7 @@ const PRODUCTS = [
 
   // ---------- Bebidas ----------
   {
-    id: "refrigerante-lata",
+    id: "agua-mineral",
     category: "Bebidas",
     name: "Água Mineral",
     shortDesc: "",
@@ -454,7 +454,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
    {
-    id: "refrigerante-lata",
+    id: "coca-cola-250ml",
     category: "Bebidas",
     name: "Coca-cola 250ml",
     shortDesc: "",
@@ -464,7 +464,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
    {
-    id: "refrigerante-lata",
+    id: "delrio-250ml",
     category: "Bebidas",
     name: "Delrio 250ml",
     shortDesc: "",
@@ -474,7 +474,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
    {
-    id: "refrigerante-lata",
+    id: "coca-cola-lata-350ml",
     category: "Bebidas",
     name: "Coca-cola Lata 350ml",
     shortDesc: "",
@@ -484,7 +484,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
    {
-    id: "refrigerante-lata",
+    id: "coca-cola-600ml",
     category: "Bebidas",
     name: "Coca-cola 600ml",
     shortDesc: "",
@@ -494,7 +494,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
    {
-    id: "refrigerante-lata",
+    id: "deilrio-1l",
     category: "Bebidas",
     name: "Deilrio 1L",
     shortDesc: "",
@@ -504,7 +504,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
    {
-    id: "refrigerante-lata",
+    id: "coca-cola-1l",
     category: "Bebidas",
     name: "Coca-cola 1L",
     shortDesc: "",
@@ -514,7 +514,7 @@ const PRODUCTS = [
     modifierGroups: [],
   },
    {
-    id: "refrigerante-lata",
+    id: "coca-cola-1-5l",
     category: "Bebidas",
     name: "Coca-cola 1.5L",
     shortDesc: "",

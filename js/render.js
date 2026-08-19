@@ -30,21 +30,19 @@ function renderHome() {
 
     <div class="store-meta">
       <div>
-        <div class="cashback">${STORE.cashbackPct}% de Cashback</div>
+        <div class="status-open">🟢 Loja aberta</div>
       </div>
       <div>
-        <div class="label">Entrega</div>
+        <div class="label">🚴 Entrega</div>
         <div class="value">${STORE.deliveryEta}</div>
       </div>
       <div>
-        <div class="label">Pedido mínimo</div>
-        <div class="value">${money(STORE.minOrder)}</div>
+        <div class="points-label">⭐ Ganhe pontos</div>
       </div>
     </div>
 
     <div class="actions-row">
       <a href="#" class="login-link">Fazer login &rsaquo;</a>
-      <button class="benefits-btn">🎁 Aproveite benefícios!</button>
     </div>
 
     <nav class="category-nav" id="category-nav">

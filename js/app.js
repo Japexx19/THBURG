@@ -170,8 +170,8 @@ document.addEventListener("click", async (e) => {
       reference,
       region,
       city: STORE.city,
-      eta: "55-65 min",
-      fee: 8.9,
+      eta: "0-15 min",
+      fee: 0,
     };
     state.modal = null;
     render();

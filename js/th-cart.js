@@ -26,7 +26,7 @@
 
   function totals(){
     const subtotal=cart.reduce((s,x)=>s+x.unit*x.qty,0);
-    const fee = Number(window.TH_DELIVERY_FEE || 0);
+    const fee = 0;
     return {subtotal,fee,total:subtotal+fee};
   }
 
