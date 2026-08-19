@@ -1,38 +1,20 @@
+/* Carrinho antigo removido: o projeto usa o carrinho integrado em js/render.js. */
 
-/* TH Lanches — Carrinho estilo marketplace */
-.th-cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:9998;display:none}
-.th-cart-overlay.is-open{display:block}
-.th-cart-drawer{position:fixed;right:0;top:0;bottom:0;width:min(460px,100%);background:#fff;z-index:9999;display:flex;flex-direction:column;box-shadow:-8px 0 30px rgba(0,0,0,.18);transform:translateX(100%);transition:.22s ease}
-.th-cart-drawer.is-open{transform:translateX(0)}
-.th-cart-head{display:flex;align-items:center;justify-content:space-between;padding:18px;border-bottom:1px solid #eee}
-.th-cart-head h2{margin:0;font-size:20px}
-.th-cart-close{border:0;background:transparent;font-size:26px;cursor:pointer}
-.th-cart-body{flex:1;overflow:auto;padding:14px 18px}
-.th-cart-item{padding:14px 0;border-bottom:1px solid #eee}
-.th-cart-item-top{display:flex;justify-content:space-between;gap:12px}
-.th-cart-item-name{font-weight:700}
-.th-cart-item-price{font-weight:700}
-.th-cart-item-sub{font-size:13px;color:#666;margin-top:4px}
-.th-qty{display:inline-flex;align-items:center;border:1px solid #ddd;border-radius:8px;overflow:hidden;margin-top:9px}
-.th-qty button{width:34px;height:32px;border:0;background:#f5f5f5;cursor:pointer;font-size:18px}
-.th-qty span{min-width:34px;text-align:center}
-.th-cart-summary{border-top:1px solid #eee;padding:16px 18px;background:#fff}
-.th-line{display:flex;justify-content:space-between;margin:7px 0}
-.th-line.total{font-size:19px;font-weight:800;margin-top:12px}
-.th-cart-cta{width:100%;border:0;border-radius:10px;padding:14px 16px;font-weight:800;cursor:pointer;margin-top:12px}
-.th-cart-empty{text-align:center;color:#666;padding:60px 15px}
-.th-checkout-card{background:#fff;border-radius:12px;padding:16px;margin-top:12px;border:1px solid #eee}
-.th-checkout-card h3{margin:0 0 12px}
-.th-field{width:100%;box-sizing:border-box;border:1px solid #ddd;border-radius:9px;padding:11px;margin:6px 0 10px;font-size:15px}
-.th-option-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.th-option{border:1px solid #ddd;background:#fff;border-radius:9px;padding:11px;text-align:left;cursor:pointer}
-.th-option.active{border:2px solid currentColor}
-@media(max-width:520px){.th-cart-drawer{width:100%}.th-option-grid{grid-template-columns:1fr}}
 
-.th-cart-float{position:fixed;right:18px;bottom:18px;z-index:5000;border:0;border-radius:999px;padding:13px 18px;font-weight:800;box-shadow:0 6px 24px rgba(0,0,0,.18);cursor:pointer}
-.th-cart-badge{display:inline-block;min-width:20px;margin-left:6px}
+/* Opção escolhida nos modificadores */
+.modifier-option.selected,
+.modifier-option.active,
+.option-card.selected,
+.modifier-card.selected {
+  border-color: #16a34a !important;
+  background: #eaf8ef !important;
+  color: #15803d !important;
+  box-shadow: 0 0 0 1px #16a34a inset !important;
+}
 
-/* Correção: o carrinho não aparece dentro da página; só abre como painel. */
-.th-cart-overlay:not(.is-open){display:none!important}
-.th-cart-drawer:not(.is-open){display:flex!important;visibility:hidden!important;pointer-events:none!important}
-.th-cart-drawer.is-open{visibility:visible!important;pointer-events:auto!important}
+.modifier-option.selected::after,
+.modifier-option.active::after,
+.option-card.selected::after,
+.modifier-card.selected::after {
+  color: #16a34a !important;
+}

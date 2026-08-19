@@ -36,7 +36,7 @@ a { color: inherit; text-decoration: none; }
 button { font-family: inherit; cursor: pointer; }
 input { font-family: inherit; }
 
-/* ---------- Topbar de busca ---------- */
+/* ---------- Cabeçalho ---------- */
 .search-bar {
   position: sticky;
   top: 0;
@@ -115,7 +115,7 @@ input { font-family: inherit; }
   font-size: 0.8rem;
 }
 .store-meta > div:last-child { border-right: none; }
-.store-meta .cashback { color: var(--green); font-weight: 700; }
+.store-meta .status-open { color: var(--green); font-weight: 700; }\n.store-meta .points-label { color: var(--green-dark); font-weight: 700; }
 .store-meta .value { font-weight: 600; margin-top: 2px; }
 .store-meta .label { color: var(--text-muted); }
 
@@ -136,29 +136,42 @@ input { font-family: inherit; }
   font-size: 0.85rem;
 }
 
-/* ---------- Navegação de categorias (sticky) ---------- */
+/* ---------- Navegação de categorias ---------- */
 .category-nav {
   position: sticky;
   top: 57px;
   z-index: 20;
   background: #fff;
   display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
   gap: 20px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
   overflow-x: auto;
-  padding: 14px 16px;
+  overflow-y: hidden;
+  padding: 14px 16px 0;
   border-bottom: 1px solid var(--border);
   scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  touch-action: pan-x;
 }
 .category-nav::-webkit-scrollbar { display: none; }
 .category-nav button {
+  flex: 0 0 auto;
+  display: block;
   background: none;
   border: none;
   white-space: nowrap;
+  width: max-content;
   font-size: 0.9rem;
   color: var(--text-muted);
-  padding-bottom: 6px;
+  padding: 0 0 10px;
   border-bottom: 2px solid transparent;
   font-weight: 500;
+  cursor: pointer;
 }
 .category-nav button.active {
   color: var(--text);
@@ -584,3 +597,57 @@ input { font-family: inherit; }
 }
 
 .empty-state { text-align: center; padding: 60px 24px; color: var(--text-muted); }
+
+/* TH BURG: nenhuma barra de pesquisa no cardápio */
+.search-bar, .modifier-search, #search-input { display:none !important; }
+
+.change-box{margin-top:14px;padding:14px;border:1px solid #e5e7eb;border-radius:12px;background:#fff}.change-title{font-weight:700;margin-bottom:10px}.change-actions{display:flex;gap:8px}.change-choice{flex:1;border:1px solid #d1d5db;background:#fff;border-radius:9px;padding:10px;cursor:pointer}.change-choice.picked{border-color:var(--green);background:#f0fdf4;color:#166534;font-weight:700}.change-input-label{display:block;font-size:.85rem;margin:12px 0 6px;color:#555}.change-input-wrap{display:flex;align-items:center;gap:8px;border:1px solid #d1d5db;border-radius:9px;padding:0 10px;background:#fff}.change-input-wrap span{font-weight:700;color:#555}.change-input-wrap input{border:0;outline:0;width:100%;padding:11px 0;font-size:1rem;background:transparent}
+
+@media (max-width: 520px) {
+  .category-nav {
+    gap: 22px;
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .category-nav button {
+    font-size: 0.88rem;
+  }
+}
+
+
+/* Opção escolhida nos modificadores */
+.modifier-option.selected,
+.modifier-option.active,
+.option-card.selected,
+.modifier-card.selected {
+  border-color: #16a34a !important;
+  background: #eaf8ef !important;
+  color: #15803d !important;
+  box-shadow: 0 0 0 1px #16a34a inset !important;
+}
+
+.modifier-option.selected::after,
+.modifier-option.active::after,
+.option-card.selected::after,
+.modifier-card.selected::after {
+  color: #16a34a !important;
+}
+
+/* Seleção individual de pão por unidade */
+.unit-bread-card {
+  margin: 0 0 14px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: #fff;
+}
+.unit-bread-title {
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.unit-bread-options .option-row {
+  margin-bottom: 8px;
+}
+.unit-bread-options .option-row:last-child {
+  margin-bottom: 0;
+}
