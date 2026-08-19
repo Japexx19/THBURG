@@ -30,7 +30,12 @@ function loadCart() {
 }
 
 function findProduct(id) {
-  return PRODUCTS.find((p) => p.id === id);
+  const wanted = decodeURIComponent(String(id ?? "")).trim();
+  return (
+    PRODUCTS.find((p) => p.id === wanted) ||
+    PRODUCTS.find((p) => p.id.toLowerCase() === wanted.toLowerCase()) ||
+    PRODUCTS.find((p) => String(p.name).trim().toLowerCase() === wanted.toLowerCase())
+  );
 }
 
 function cartTotal() {
@@ -56,7 +61,9 @@ function startDraft(product) {
     qty: 1,
     notes: "",
     selections: {}, // groupId -> [optionId,...]
+    unitBreadSelections: [], // uma escolha de pão para cada unidade do produto
   };
+  state.draft.unitBreadSelections = Array.from({ length: state.draft.qty }, () => null);
 }
 
 function draftBasePrice() {
@@ -91,32 +98,76 @@ function toggleMultiOption(groupId, optionId, max) {
 
 function addDraftToCart() {
   const { product, qty, notes, selections } = state.draft;
-  const selectionList = [];
-  product.modifierGroups.forEach((group) => {
-    (selections[group.id] || []).forEach((optId) => {
-      const opt = group.options.find((o) => o.id === optId);
-      if (opt) {
-        selectionList.push({
-          groupTitle: group.title,
-          optionId: opt.id,
-          optionName: opt.name,
-          price: opt.price,
+  const breadGroup = product.modifierGroups.find((g) => g.id === "pao");
+  const breadChoices = state.draft.unitBreadSelections || [];
+
+  if (breadGroup) {
+    const missing = Array.from({ length: qty }, (_, i) => breadChoices[i]).some((v) => !v);
+    if (missing) {
+      renderToast("Escolha o pão de cada hambúrguer.");
+      return false;
+    }
+
+    for (let i = 0; i < qty; i++) {
+      const selectionList = [];
+      product.modifierGroups.forEach((group) => {
+        const ids = group.id === "pao"
+          ? [breadChoices[i]]
+          : (selections[group.id] || []);
+
+        ids.forEach((optId) => {
+          const opt = group.options.find((o) => o.id === optId);
+          if (opt) {
+            selectionList.push({
+              groupTitle: group.title,
+              optionId: opt.id,
+              optionName: opt.name,
+              price: opt.price,
+            });
+          }
         });
-      }
+      });
+
+      state.cart.push({
+        cartId: `${product.id}-${Date.now()}-${i}`,
+        productId: product.id,
+        name: product.name,
+        image: product.image,
+        notes,
+        selections: selectionList,
+        lineTotal: product.price,
+        qty: 1,
+      });
+    }
+  } else {
+    const selectionList = [];
+    product.modifierGroups.forEach((group) => {
+      (selections[group.id] || []).forEach((optId) => {
+        const opt = group.options.find((o) => o.id === optId);
+        if (opt) {
+          selectionList.push({
+            groupTitle: group.title,
+            optionId: opt.id,
+            optionName: opt.name,
+            price: opt.price,
+          });
+        }
+      });
     });
-  });
-  const lineTotal = draftBasePrice();
-  state.cart.push({
-    cartId: `${product.id}-${Date.now()}`,
-    productId: product.id,
-    name: product.name,
-    image: product.image,
-    notes,
-    selections: selectionList,
-    lineTotal,
-    qty,
-  });
+    state.cart.push({
+      cartId: `${product.id}-${Date.now()}`,
+      productId: product.id,
+      name: product.name,
+      image: product.image,
+      notes,
+      selections: selectionList,
+      lineTotal: draftBasePrice(),
+      qty,
+    });
+  }
+
   saveCart();
+  return true;
 }
 
 function removeCartItem(cartId) {

@@ -133,6 +133,38 @@ function renderProduct(productId) {
         ${product.modifierGroups
           .map((group) => {
             const picked = state.draft.selections[group.id] || [];
+
+            if (group.id === "pao" && state.draft.qty > 1) {
+              return `
+                <div class="modifier-group">
+                  <div class="head">
+                    <h2>Escolha o pão de cada hambúrguer</h2>
+                    <span class="hint">Você pode escolher diferente para cada unidade</span>
+                  </div>
+                  ${Array.from({ length: state.draft.qty }, (_, unitIndex) => {
+                    const unitPicked = state.draft.unitBreadSelections?.[unitIndex] || null;
+                    return `
+                      <div class="unit-bread-card">
+                        <div class="unit-bread-title">Hambúrguer ${unitIndex + 1}</div>
+                        <div class="unit-bread-options">
+                          ${group.options.map((opt) => {
+                            const isPicked = unitPicked === opt.id;
+                            return `
+                              <div class="option-row ${isPicked ? "picked" : ""}"
+                                data-toggle-unit-option
+                                data-unit-index="${unitIndex}"
+                                data-group="${group.id}"
+                                data-option="${opt.id}">
+                                <div class="left"><span class="opt-name">${opt.name}</span></div>
+                                <div class="radio-dot ${isPicked ? "checked" : ""}"></div>
+                              </div>`;
+                          }).join("")}
+                        </div>
+                      </div>`;
+                  }).join("")}
+                </div>`;
+            }
+
             return `
           <div class="modifier-group" data-group="${group.id}">
             <div class="head">

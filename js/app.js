@@ -14,13 +14,15 @@ function parseHash() {
   const hash = location.hash.replace(/^#\/?/, "");
   const [name, id] = hash.split("/");
   if (!name) return { name: "home", params: {} };
-  if (name === "produto") return { name: "produto", params: { id } };
+  if (name === "produto") {
+    return { name: "produto", params: { id: decodeURIComponent(id || "").trim() } };
+  }
   return { name, params: {} };
 }
 
 function navigate(routeName, productId) {
   if (routeName === "produto") {
-    location.hash = `#/produto/${productId}`;
+    location.hash = `#/produto/${encodeURIComponent(productId)}`;
   } else if (routeName === "home") {
     location.hash = "#/";
   } else {
@@ -60,12 +62,34 @@ document.addEventListener("click", async (e) => {
 
   const cat = e.target.closest("[data-cat]");
   if (cat) {
-    state.activeCategory = cat.dataset.cat;
-    const el = document.getElementById(`cat-${cssId(cat.dataset.cat)}`);
+    e.preventDefault();
+    const category = cat.dataset.cat;
+    state.activeCategory = category;
+
+    // Guarda a posição horizontal atual para a barra não "travar" no primeiro item.
+    const nav = document.getElementById("category-nav");
+    const oldLeft = nav ? nav.scrollLeft : 0;
+
     render();
+
     requestAnimationFrame(() => {
-      const target = document.getElementById(`cat-${cssId(cat.dataset.cat)}`);
-      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+      const newNav = document.getElementById("category-nav");
+      const selected = newNav?.querySelector(`[data-cat="${CSS.escape(category)}"]`);
+
+      if (newNav && selected) {
+        // Centraliza somente a barra horizontal; não pula a página.
+        const left = selected.offsetLeft - (newNav.clientWidth - selected.offsetWidth) / 2;
+        newNav.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
+      } else if (newNav) {
+        newNav.scrollLeft = oldLeft;
+      }
+
+      const target = document.getElementById(`cat-${cssId(category)}`);
+      if (target) {
+        const headerOffset = 75;
+        const y = target.getBoundingClientRect().top + window.scrollY - headerOffset;
+        window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
+      }
     });
     return;
   }
@@ -75,6 +99,31 @@ document.addEventListener("click", async (e) => {
   if (qtyBtn) {
     const delta = Number(qtyBtn.dataset.qty);
     state.draft.qty = Math.max(1, state.draft.qty + delta);
+
+    if (!Array.isArray(state.draft.unitBreadSelections)) {
+      state.draft.unitBreadSelections = [];
+    }
+    while (state.draft.unitBreadSelections.length < state.draft.qty) {
+      state.draft.unitBreadSelections.push(null);
+    }
+    state.draft.unitBreadSelections = state.draft.unitBreadSelections.slice(0, state.draft.qty);
+
+    // Ao voltar para 1 unidade, preserva a primeira escolha como a escolha normal.
+    if (state.draft.qty === 1 && state.draft.unitBreadSelections[0]) {
+      state.draft.selections.pao = [state.draft.unitBreadSelections[0]];
+    }
+    render();
+    return;
+  }
+
+  const unitOption = e.target.closest("[data-toggle-unit-option]");
+  if (unitOption) {
+    const index = Number(unitOption.dataset.unitIndex);
+    const optionId = unitOption.dataset.option;
+    if (!Array.isArray(state.draft.unitBreadSelections)) {
+      state.draft.unitBreadSelections = [];
+    }
+    state.draft.unitBreadSelections[index] = optionId;
     render();
     return;
   }
@@ -92,7 +141,8 @@ document.addEventListener("click", async (e) => {
   }
 
   if (e.target.id === "add-to-cart-btn") {
-    addDraftToCart();
+    const added = addDraftToCart();
+    if (!added) return;
     state.draft = null;
     renderToast("Item adicionado à sacola!");
     navigate("home");

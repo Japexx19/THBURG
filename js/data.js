@@ -63,7 +63,19 @@ const PRODUCTS = [
     description: "Pão brioche, carne, queijo, presunto, batata palha, alface, molho especial e maionese temperada.",
     price: 11,
     image: "assets/products/x-bacon.jpg",
-    modifierGroups: [],
+    modifierGroups: [
+      {
+        id: "pao",
+        title: "Escolha o pão",
+        type: "single",
+        max: 1,
+        required: true,
+        options: [
+          { id: "pao-brioche", name: "Pão brioche", price: 0 },
+          { id: "pao-arabe", name: "Pão árabe", price: 0 }
+        ]
+      }
+    ],
   },
 
     {
@@ -74,7 +86,19 @@ const PRODUCTS = [
     description: "Pão brioche, blend 150g, batata crispy, queijo cheddar, bacon duplo, alface, tomate e molho especial + 100g de batata.",
     price: 14,
     image: "assets/products/x-bacon.jpg",
-    modifierGroups: [],
+    modifierGroups: [
+      {
+        id: "pao",
+        title: "Escolha o pão",
+        type: "single",
+        max: 1,
+        required: true,
+        options: [
+          { id: "pao-brioche", name: "Pão brioche", price: 0 },
+          { id: "pao-arabe", name: "Pão árabe", price: 0 }
+        ]
+      }
+    ],
   },
    {
     id: "tuina",
@@ -84,10 +108,22 @@ const PRODUCTS = [
     description: "Pão brioche, carne, ovo, calabresa, presunto, queijo, alface, cebola, molho especial e maionese temperada.",
     price: 16,
     image: "assets/products/x-bacon.jpg",
-    modifierGroups: [],
+    modifierGroups: [
+      {
+        id: "pao",
+        title: "Escolha o pão",
+        type: "single",
+        max: 1,
+        required: true,
+        options: [
+          { id: "pao-brioche", name: "Pão brioche", price: 0 },
+          { id: "pao-arabe", name: "Pão árabe", price: 0 }
+        ]
+      }
+    ],
   },
    {
-    id: "x-tudo",
+    id: "Tangente",
     category: "Hambúrgueres",
     mostOrdered: true,
     name: "Tangente",
@@ -96,10 +132,22 @@ const PRODUCTS = [
       "Pão brioche, carne, ovo, queijo coalho, queijo cheddar, bacon, cebola, molho especial e maionese temperada.",
     price: 17,
     image: "assets/products/x-tudo.jpg",
-    modifierGroups: [],
+    modifierGroups: [
+      {
+        id: "pao",
+        title: "Escolha o pão",
+        type: "single",
+        max: 1,
+        required: true,
+        options: [
+          { id: "pao-brioche", name: "Pão brioche", price: 0 },
+          { id: "pao-arabe", name: "Pão árabe", price: 0 }
+        ]
+      }
+    ],
   },
     {
-    id: "x-burger",
+    id: "Mirim",
     category: "Hambúrgueres",
     mostOrdered: true,
     name: "Mirim",
@@ -107,41 +155,89 @@ const PRODUCTS = [
     description: "Pão brioche, frango desfiado, calabresa, presunto, queijo cheddar, cebola, alface, molho especial e maionese temperada.",
     price: 18,
     image: "assets/products/x-burger.jpg",
-    modifierGroups: [],
+    modifierGroups: [
+      {
+        id: "pao",
+        title: "Escolha o pão",
+        type: "single",
+        max: 1,
+        required: true,
+        options: [
+          { id: "pao-brioche", name: "Pão brioche", price: 0 },
+          { id: "pao-arabe", name: "Pão árabe", price: 0 }
+        ]
+      }
+    ],
   },
     {
-    id: "x-egg",
+    id: "Pé da serra",
     category: "Hambúrgueres",
     name: "Pé da serra",
     shortDesc: "Pão brioche, 2 carnes, ovo, 2 presuntos, 2 queijos, alface, cebola, molho especial e maionese temperada.",
     description: "Pão brioche, 2 carnes, ovo, 2 presuntos, 2 queijos, alface, cebola, molho especial e maionese temperada.",
     price: 18,
     image: "assets/products/x-egg.jpg",
-    modifierGroups: [],
+    modifierGroups: [
+      {
+        id: "pao",
+        title: "Escolha o pão",
+        type: "single",
+        max: 1,
+        required: true,
+        options: [
+          { id: "pao-brioche", name: "Pão brioche", price: 0 },
+          { id: "pao-arabe", name: "Pão árabe", price: 0 }
+        ]
+      }
+    ],
   },
 
   {
-    id: "misto-quente",
+    id: "Massapê",
     category: "Hambúrgueres",
     name: "Massapê",
     shortDesc: "Pão brioche, carne de sol, ovo, calabresa, presunto, queijo cheddar, cebola, alface, molho especial e maionese temperada.",
     description: "Pão brioche, carne de sol, ovo, calabresa, presunto, queijo cheddar, cebola, alface, molho especial e maionese temperada.",
     price: 19,
     image: "assets/products/misto-quente.jpg",
-    modifierGroups: [],
+    modifierGroups: [
+      {
+        id: "pao",
+        title: "Escolha o pão",
+        type: "single",
+        max: 1,
+        required: true,
+        options: [
+          { id: "pao-brioche", name: "Pão brioche", price: 0 },
+          { id: "pao-arabe", name: "Pão árabe", price: 0 }
+        ]
+      }
+    ],
   },
   {
-    id: "bauru",
+    id: "Mumbaba",
     category: "Hambúrgueres",
     name: "Mumbaba",
     shortDesc: "Pão americano, blend 300g, queijo cheddar, bacon, alface, tomate e molho especial + 100g de batata.",
     description: "Pão americano, blend 300g, queijo cheddar, bacon, alface, tomate e molho especial + 100g de batata.",
     price: 23,
     image: "assets/products/bauru.jpg",
-    modifierGroups: [],
+    modifierGroups: [
+      {
+        id: "pao",
+        title: "Escolha o pão",
+        type: "single",
+        max: 1,
+        required: true,
+        options: [
+          { id: "pao-americano", name: "Pão americano", price: 0 },
+          { id: "pao-arabe", name: "Pão árabe", price: 0 }
+        ]
+      }
+    ],
   },
   {
-    id: "x-salada",
+    id: "Padre Linhares",
     category: "Hambúrgueres",
     name: "Padre Linhares",
     shortDesc: "Pão americano, blend 150g, frango, queijo cheddar, bacon, alface, cebola, tomate e molho especial + 100g de batata.",
@@ -149,43 +245,157 @@ const PRODUCTS = [
     price: 26,
     image: "assets/products/x-salada.jpg",
     modifierGroups: [
-
-    ],
+      {
+        id: "pao",
+        title: "Escolha o pão",
+        type: "single",
+        max: 1,
+        required: true,
+        options: [
+          { id: "pao-americano", name: "Pão americano", price: 0 },
+          { id: "pao-arabe", name: "Pão árabe", price: 0 }
+        ]
+      }
+    ]
   },
 
-  // ---------- Cachorro-Quente ----------
-  {
-    id: "dog-simples",
-    category: "Cachorro-Quente",
-    name: "Cachorro-Quente Simples",
-    shortDesc: "Pão, salsicha, ketchup e mostarda.",
-    description: "Pão macio, salsicha suculenta, ketchup e mostarda — do jeito clássico de carrinho.",
-    price: 10,
+  // ---------- Hambúrgueres Artesanal ----------
+    {
+    id: "CARTUCHA",
+    category: "Hambúrgueres Artesanal",
+    name: "CARTUCHA",
+    shortDesc: "Carne artesanal 110g, queijo, alface, cebola caramelizada, molho especial e maionese temperada.",
+    description: "Carne artesanal 110g, queijo, alface, cebola caramelizada, molho especial e maionese temperada.",
+    price: 15,
     image: "assets/products/dog-simples.jpg",
-    modifierGroups: [],
-  },
-  {
-    id: "dog-completo",
-    category: "Cachorro-Quente",
-    mostOrdered: true,
-    name: "Cachorro-Quente Completo",
-    shortDesc: "Salsicha, molhos, batata palha, milho e queijo.",
-    description:
-      "O clássico dog de boteco: salsicha, purê de batata, milho, ervilha, batata palha, queijo ralado e os molhos da casa.",
-    price: 18,
-    image: "assets/products/dog-completo.jpg",
     modifierGroups: [
       {
-        id: "molho-dog",
-        title: "Escolha uma Maionese",
-        type: "multi",
-        max: 5,
+        id: "pao",
+        title: "Escolha o pão",
+        type: "single",
+        max: 1,
+        required: true,
         options: [
-          { id: "sem-maionese", name: "Não quero Maionese!", price: 0 },
-          { id: "maionese-alho", name: "Maionese de Alho", price: 3 },
-          { id: "maionese-picante", name: "Maionese Picante", price: 3 },
-        ],
-      },
+          { id: "pao-brioche", name: "Pão brioche", price: 0 },
+          { id: "pao-americano", name: "Pão americano", price: 0 },
+          { id: "pao-arabe", name: "Pão árabe", price: 0 }
+        ]
+      }
+    ],
+  },
+  {
+    id: "BANDEIRA BRANCA",
+    category: "Hambúrgueres Artesanal",
+    name: "BANDEIRA BRANCA",
+    shortDesc: "Carne artesanal 110g, cheddar, queijo, cebola caramelizada, molho especial e maionese temperada.",
+    description: "Carne artesanal 110g, cheddar, queijo, cebola caramelizada, molho especial e maionese temperada.",
+    price: 16,
+    image: "assets/products/dog-simples.jpg",
+    modifierGroups: [
+      {
+        id: "pao",
+        title: "Escolha o pão",
+        type: "single",
+        max: 1,
+        required: true,
+        options: [
+          { id: "pao-brioche", name: "Pão brioche", price: 0 },
+          { id: "pao-americano", name: "Pão americano", price: 0 },
+          { id: "pao-arabe", name: "Pão árabe", price: 0 }
+        ]
+      }
+    ],
+  },
+  {
+    id: "MARAMBAIA",
+    category: "Hambúrgueres Artesanal",
+    name: "MARAMBAIA",
+    shortDesc: "Carne artesanal 110g, queijo, calabresa, cebola caramelizada, molho especial e maionese temperada.",
+    description: "Carne artesanal 110g, queijo, calabresa, cebola caramelizada, molho especial e maionese temperada.",
+    price: 16,
+    image: "assets/products/dog-simples.jpg",
+    modifierGroups: [
+      {
+        id: "pao",
+        title: "Escolha o pão",
+        type: "single",
+        max: 1,
+        required: true,
+        options: [
+          { id: "pao-brioche", name: "Pão brioche", price: 0 },
+          { id: "pao-americano", name: "Pão americano", price: 0 },
+          { id: "pao-arabe", name: "Pão árabe", price: 0 }
+        ]
+      }
+    ],
+  },
+    {
+    id: "ALTO DA BOA VISTA",
+    category: "Hambúrgueres Artesanal",
+    name: "ALTO DA BOA VISTA",
+    shortDesc: "Carne artesanal 110g, queijo, ovo, cebola caramelizada, molho especial e maionese temperada.",
+    description: "Carne artesanal 110g, queijo, ovo, cebola caramelizada, molho especial e maionese temperada.",
+    price: 16,
+    image: "assets/products/dog-simples.jpg",
+    modifierGroups: [
+      {
+        id: "pao",
+        title: "Escolha o pão",
+        type: "single",
+        max: 1,
+        required: true,
+        options: [
+          { id: "pao-brioche", name: "Pão brioche", price: 0 },
+          { id: "pao-americano", name: "Pão americano", price: 0 },
+          { id: "pao-arabe", name: "Pão árabe", price: 0 }
+        ]
+      }
+    ],
+  },
+    {
+    id: "CENTRO",
+    category: "Hambúrgueres Artesanal",
+    name: "CENTRO",
+    shortDesc: "Carne artesanal 110g, bacon, queijo, cebola caramelizada, molho especial e maionese temperada.",
+    description: "Carne artesanal 110g, bacon, queijo, cebola caramelizada, molho especial e maionese temperada.",
+    price: 17,
+    image: "assets/products/dog-simples.jpg",
+    modifierGroups: [
+      {
+        id: "pao",
+        title: "Escolha o pão",
+        type: "single",
+        max: 1,
+        required: true,
+        options: [
+          { id: "pao-brioche", name: "Pão brioche", price: 0 },
+          { id: "pao-americano", name: "Pão americano", price: 0 },
+          { id: "pao-arabe", name: "Pão árabe", price: 0 }
+        ]
+      }
+    ],
+  },
+    {
+    id: "ALTO DA CADEIA",
+    category: "Hambúrgueres Artesanal",
+    name: "ALTO DA CADEIA",
+    shortDesc: "Carne artesanal 110g, queijo, carne de sol, queijo, catupiry, cebola caramelizada, molho especial e maionese temperada.",
+    description: "Carne artesanal 110g, queijo, carne de sol, queijo, catupiry, cebola caramelizada, molho especial e maionese temperada.",
+    price: 20,
+    image: "assets/products/dog-simples.jpg",
+    modifierGroups: [
+      {
+        id: "pao",
+        title: "Escolha o pão",
+        type: "single",
+        max: 1,
+        required: true,
+        options: [
+          { id: "pao-brioche", name: "Pão brioche", price: 0 },
+          { id: "pao-americano", name: "Pão americano", price: 0 },
+          { id: "pao-arabe", name: "Pão árabe", price: 0 }
+        ]
+      }
     ],
   },
 
