@@ -37,10 +37,10 @@ async function load(){
 }
 function add(o){
   const el=document.createElement("div"); el.className="card"; el.id="order-"+o.id;
-  const addr=o.address?`${o.address.street||""}, ${o.address.number||"s/n"} — ${o.address.region||""}`:"Retirada";
+  const addr=o.fulfillment==="mesa"?`Mesa ${o.address?.table||""}`:(o.address?`${o.address.street||""}, ${o.address.number||"s/n"} — ${o.address.region||""}`:"Retirada");
   el.innerHTML=`<h2>Pedido #${o.id}</h2>
   <div><b>${o.customer_name}</b> ${o.customer_phone||""}</div>
-  <div class="muted">${o.fulfillment==="entrega"?"Entrega":"Retirada"} · ${o.payment_method}</div>
+  <div class="muted">${o.fulfillment==="entrega"?"Entrega":(o.fulfillment==="mesa"?"Mesa":"Retirada")} · ${o.payment_method}${o.payment_change?` · Troco para R$ ${Number(o.payment_change).toFixed(2).replace(".",",")}`:""}</div>
   <div class="item">${addr}</div>
   ${o.items.map(i=>`<div class="item"><b>${i.qty}x</b> ${i.product_name}<br><small>${i.selections_json||""} ${i.notes||""}</small></div>`).join("")}
   <p><b>Total: R$ ${Number(o.total).toFixed(2).replace(".",",")}</b></p>
